@@ -12,7 +12,7 @@ const CustomerFilter = props => (
   </Filter>
 )
 
-const CustomerList = props => (
+export const CustomerList = props => (
   <List {...props} filters={<CustomerFilter />} title="List of Customers">
     <Datagrid
       rowClick={(id, basePath, record) => {

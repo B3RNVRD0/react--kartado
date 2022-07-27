@@ -1,6 +1,15 @@
 import * as React from 'react'
-import { useMediaQuery, Stack, Typography } from '@mui/material'
 
+import {
+  useMediaQuery,
+  Stack,
+  Button,
+  Toolbar,
+  Card,
+  Typography
+} from '@mui/material'
+import ChevronLeft from '@mui/icons-material/ChevronLeft'
+import ChevronRight from '@mui/icons-material/ChevronRight'
 import {
   List,
   Datagrid,
@@ -23,11 +32,36 @@ const postFilters = [
     <SelectInput optionText="name" />
   </ReferenceInput>
 ]
-
-export const PostList = () => {
+const PostPagination = () => {
+  const { page, hasPreviousPage, hasNextPage, setPage } = useListContext()
+  if (!hasPreviousPage && !hasNextPage) return null
+  return (
+    <Toolbar>
+      {hasPreviousPage && (
+        <Button
+          key="previous"
+          onClick={() => setPage(page - 1)}
+          startIcon={<ChevronLeft />}
+        >
+          Previous
+        </Button>
+      )}
+      {hasNextPage && (
+        <Button
+          key="next"
+          onClick={() => setPage(page + 1)}
+          startIcon={<ChevronRight />}
+        >
+          Next
+        </Button>
+      )}
+    </Toolbar>
+  )
+}
+export const PostList = props => {
   const isSmall = useMediaQuery(theme => theme.breakpoints.down('sm'))
   return (
-    <List>
+    <List {...props} filters={postFilters} pagination={<PostPagination />}>
       {isSmall ? (
         <SimpleList
           primaryText={record => record.title}
@@ -52,7 +86,7 @@ export const PostList = () => {
 }
 
 const PostTitle = ({ record }) => {
-  return <span>Post {record ? `"${record.title}"` : ''}</span>
+  return <span>posts {record ? `"${record.title}"` : ''}</span>
 }
 
 export const PostEdit = () => (
@@ -77,23 +111,4 @@ export const PostCreate = props => (
       <TextInput multiline source="body" />
     </SimpleForm>
   </Create>
-)
-
-const SimpleBookList = () => {
-  const { data } = useListContext()
-  return (
-    <Stack spacing={2} sx={{ padding: 2 }}>
-      {data.map(book => (
-        <Typography key={book.id}>
-          <i>{book.title}</i>, by {book.author} ({book.year})
-        </Typography>
-      ))}
-    </Stack>
-  )
-}
-
-const BookList = () => (
-  <List emptyWhileLoading>
-    <SimpleBookList />
-  </List>
 )

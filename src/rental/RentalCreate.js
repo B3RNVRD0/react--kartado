@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+
+import { useQuery } from '@apollo/client'
+//import { useMediaQuery } from '@mui/material'
 import {
   Create,
   SimpleForm,
@@ -7,7 +10,6 @@ import {
   useNotify,
   useRefresh,
   useRedirect,
-  useQuery,
   TextInput,
   ReferenceInput
 } from 'react-admin'
