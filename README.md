@@ -1,5 +1,6 @@
-# react-admin
-Este foi um projeto de desenvolvimento usando ReactJS e HTML. 
+React Admin
+  
+Este foi um projeto de desenvolvimento usando ReactJS, HTML e pouquinho CSS, já que a lib faz praticamente tudo dessa parte.
 Também contei com auxílio da biblioteca react-admin, o que facilita muito para dashboards. 
 O site marmelab.com foi fundamental para a execução desse projeto.
 
